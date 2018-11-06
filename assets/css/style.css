@@ -1,16 +1,75 @@
+html {
+    background-color: #B1B3B3;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
 #start {
-    margin-top: 50px;
-    text-align: center;
+    margin: 25%;
+    width: 50%;
+    height: auto;
 }
 #wins {
     display: none;
+    margin-top: 30px;
+    text-align: center;
+}
+#win-number {
+    color: #A1FF97;
 }
 #remaining {
     display: none;
 }
+#remaining-number {
+    color: #FF8080;
+}
 #guessed {
     display: none;
 }
+#guessed-letters {
+    color: #49AEF2;
+}
 #word {
+    margin-top: 25%;
+    font-size: 50px;
     display: none;
+    width: auto;
+    text-align: center;
+}
+#top-left {
+    top: 30px;
+    right: 30px;
+}
+#top-right {
+    left: 30px;
+    top: 30px;
+}
+#bottom-left {
+    bottom: 30px;
+    right: 30px;
+}
+#bottom-right {
+    bottom: 30px;
+    left: 30px;  
+}
+.corner-images {
+    position: absolute;
+    display: none;
+    width: 100px;
+    height: 100px;
+}
+#bottom-center {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+.general-font {
+    font-family: 'Press Start 2P', cursive;
 }

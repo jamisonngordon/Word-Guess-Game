@@ -6,6 +6,7 @@ var wordWithDashes = [];
 var wins = 0;
 var remainingGuesses;
 var elementsHidden = true;
+var elements = ["wins", "remaining", "guessed", "word", "top-right", "top-left", "bottom-right", "bottom-left"]
 
 document.addEventListener("DOMContentLoaded", function() {
     initialize();
@@ -19,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function() {
     word = words[Math.floor(Math.random() * words.length)];
     console.log(word);
     wordArray = word.split('');
-    document.getElementById("guessed").innerHTML = "Letters already guessed: " + guessed.join(" ");
-    document.getElementById("remaining").innerHTML = "Guesses remaining: " + remainingGuesses;
-    document.getElementById("wins").innerHTML = "Wins: " + wins;
+    document.getElementById("guessed").innerHTML = "Letters already guessed: <span id='guessed-letters' class='general-text'>" + guessed.join(" ") + "</span>";
+    document.getElementById("remaining").innerHTML = "Guesses remaining: <span id='remaining-number' class='general-text'>" + remainingGuesses + "</span>";
+    document.getElementById("wins").innerHTML = "Wins: <span id='win-number' class='general-text'>" + wins + "</span>";
     setWord(word);
   }
 
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             wordWithDashes[x] = " ";
         }
     }
-    document.getElementById("word").innerHTML = "Word: " + wordWithDashes.join("");
+    document.getElementById("word").innerHTML = wordWithDashes.join("");
   }
 
   document.onkeyup = function(event) {
@@ -46,11 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         elementsHidden = false;
         document.getElementById("start").style.display = "none";
-
-        document.getElementById("wins").style.display = "block";
-        document.getElementById("remaining").style.display = "block";
-        document.getElementById("guessed").style.display = "block";
-        document.getElementById("word").style.display = "block";
+        
+        unHideElements();
     }
     else if(notControlKey(event.key))
     {
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 guessed[guessed.length + 1] = input;
             }
-            document.getElementById("guessed").innerHTML = "Letters already guessed: " + guessed.join(" ");
+            document.getElementById("guessed").innerHTML = "Letters already guessed: <span id='guessed-letters' class='general-text'>" + guessed.join(" ") + "</span>";
             for(x = 0; x < wordArray.length; x++)
             {
                 if(input === wordArray[x])
@@ -73,12 +71,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             
-            document.getElementById("word").innerHTML = "Word: " + wordWithDashes.join("");
+            document.getElementById("word").innerHTML = wordWithDashes.join("");
 
             if(wrongGuess)
             {
                 remainingGuesses = remainingGuesses - 1;
-                document.getElementById("remaining").innerHTML = "Guesses remaining: " + remainingGuesses;
+                document.getElementById("remaining").innerHTML = "Guesses remaining: <span id='remaining-number' class='general-text'>" + remainingGuesses + "</span>";
                 if(remainingGuesses === 0)
                 {
                     alert("Game Over!");
@@ -90,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 wins++;
                 wordWithDashes = [];
-                document.getElementById("word").innerHTML = "Word: ";
-                document.getElementById("wins").innerHTML = "Wins: " + wins;
+                document.getElementById("word").innerHTML = "";
+                document.getElementById("wins").innerHTML = "Wins: <span id='win-number' class='general-text'>" + wins + "</span>";
                 initialize();
             }
         }
@@ -123,8 +121,10 @@ document.addEventListener("DOMContentLoaded", function() {
       return true;
   }
 
-  function unHideElements() {
-    document.getElementById("start").style.display = "none";
-    document.getElementById("start").style.display = "none";
-    document.getElementById("start").style.display = "none";
+  function unHideElements() 
+  {
+      for(x = 0; x < elements.length; x++)
+      {
+        document.getElementById(elements[x]).style.display = "block";
+      }
   }

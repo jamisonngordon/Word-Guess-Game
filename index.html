@@ -4,15 +4,25 @@
         <script type="text/javascript" src="assets/javascript/game.js"></script>
         <script type="text/javascript" src="assets/javascript/words.js"></script>
         <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     </head>
 
     <body>
 
-        <h2 id="wins">Wins: 0</h2>
-        <h2 id="remaining">Guesses remaining: 5</h2>
-        <h2 id="guessed">Letters already guessed: </h2>
-        <h2 id="word">Word: </h2>
-        <h1 id="start">Press any key to get started!</h1>
+        <h2 id="wins" class="general-font">Wins: <span id="win-number" class="general-font">0</span></h2>
+        <h2 id="word" class="general-font"></h2>
+        <img src="assets/images/png/Start-01.png" id="start">
+
+        <img src="assets/images/png/playstation_O-01.png" class="corner-images" id="top-right">
+        <img src="assets/images/png/playstation_square-01.png" class="corner-images" id="top-left">
+        
+        <div id="bottom-center">
+            <h2 class="general-font" id="remaining">Guesses remaining: <span id="remaining-number" class="general-text">5</span></h2>
+            <h2 class="general-font" id="guessed">Letters already guessed: <span id="guessed-letters" class="general-text"></span></h2>
+        </div>
+        
+        <img src="assets/images/png/playstation_triangle-01.png" class="corner-images" id="bottom-right">
+        <img src="assets/images/png/playstation_x-01.png" class="corner-images" id="bottom-left">
 
     </body>
 

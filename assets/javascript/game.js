@@ -61,6 +61,10 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 guessed[guessed.length + 1] = input;
             }
+            else
+            {
+                wrongGuess = false;
+            }
             document.getElementById("guessed").innerHTML = "Letters already guessed: <span id='guessed-letters' class='general-text'>" + guessed.join(" ") + "</span>";
             for(x = 0; x < wordArray.length; x++)
             {

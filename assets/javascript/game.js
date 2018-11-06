@@ -1,38 +1,88 @@
 
 var word;
-var guessed = "";
+var wordArray = [];
+var guessed = [];
+var wordWithDashes = [];
+var wins = 0;
+var remainingGuesses;
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log(words);
-    word = words[Math.floor(Math.random() * words.length)];
-    console.log(word);
-    setWord(word);
+    initialize();
   });
 
-  function setWord(word) {
-    var wordWithDashes = "";
+  function initialize () 
+  {
+    remainingGuesses = 5;
+    guessed = [];
+    wordWithDashes = [];
+    word = words[Math.floor(Math.random() * words.length)];
+    console.log(word);
+    wordArray = word.split('');
+    document.getElementById("guessed").innerHTML = "Letters already guessed: " + guessed.join(" ");
+    document.getElementById("remaining").innerHTML = "Guesses remaining: " + remainingGuesses;
+    document.getElementById("wins").innerHTML = "Wins: " + wins;
+    setWord(word);
+  }
+
+  function setWord(word) 
+  {
     for(x = 0; x < word.length; x++)
     {
         if(word.charAt(x) != " ")
         {
-            wordWithDashes  += "-";
+            wordWithDashes[x] = "-";
         }
         else 
         {
-            wordWithDashes += " ";
+            wordWithDashes[x] = " ";
         }
     }
-    document.getElementById("word").innerHTML = "Word: " + wordWithDashes;
+    document.getElementById("word").innerHTML = "Word: " + wordWithDashes.join("");
   }
 
   document.onkeyup = function(event) {
     if(notControlKey(event.key))
     {
         var input = isLetterOrNumber(event.key);
+        var wrongGuess = true;
+        input = input.toLowerCase();
         if(input) 
         {
-            guessed += input;
-            document.getElementById("guessed").innerHTML = "Letters already guessed: " + guessed;
+            if(guessed.indexOf(input) === -1)
+            {
+                guessed[guessed.length + 1] = input;
+            }
+            document.getElementById("guessed").innerHTML = "Letters already guessed: " + guessed.join(" ");
+            for(x = 0; x < wordArray.length; x++)
+            {
+                if(input === wordArray[x])
+                {
+                    wordWithDashes[x] = input;
+                    wrongGuess = false;
+                }
+            }
+            
+            document.getElementById("word").innerHTML = "Word: " + wordWithDashes.join("");
+
+            if(wrongGuess)
+            {
+                remainingGuesses = remainingGuesses - 1;
+                document.getElementById("remaining").innerHTML = "Guesses remaining: " + remainingGuesses;
+                if(remainingGuesses === 0)
+                {
+                    alert("Game Over!");
+                    initialize();
+                }
+            }
+
+            if(wordWithDashes.indexOf('-') === -1)
+            {
+                wins++;
+                wordWithDashes = [];
+                document.getElementById("word").innerHTML = "Word: ";
+                document.getElementById("wins").innerHTML = "Wins: " + wins;
+                initialize();
+            }
         }
     }
   };
@@ -52,10 +102,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function notControlKey(string)
   {
       var notWanted = ["Backspace", "Alt", "Shift", "Control", "Meta", "Enter", "Tab", "CapsLock", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
-      console.log("String is: " + string);
       for(x = 0; x < notWanted.length; x++)
       {
-        console.log("Term is: " + notWanted[x]);
         if(string === notWanted[x]) 
         {
             return false;

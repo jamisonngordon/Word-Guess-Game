@@ -5,6 +5,7 @@ var guessed = [];
 var wordWithDashes = [];
 var wins = 0;
 var remainingGuesses;
+var elementsHidden = true;
 
 document.addEventListener("DOMContentLoaded", function() {
     initialize();
@@ -41,7 +42,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   document.onkeyup = function(event) {
-    if(notControlKey(event.key))
+    if(elementsHidden)
+    {
+        elementsHidden = false;
+        document.getElementById("start").style.display = "none";
+
+        document.getElementById("wins").style.display = "block";
+        document.getElementById("remaining").style.display = "block";
+        document.getElementById("guessed").style.display = "block";
+        document.getElementById("word").style.display = "block";
+    }
+    else if(notControlKey(event.key))
     {
         var input = isLetterOrNumber(event.key);
         var wrongGuess = true;
@@ -110,4 +121,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
       return true;
+  }
+
+  function unHideElements() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("start").style.display = "none";
+    document.getElementById("start").style.display = "none";
   }

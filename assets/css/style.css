@@ -4,6 +4,9 @@ html {
     height: 100%;
     width: 100%;
 }
+body {
+    background-color: #B1B3B3 !important;
+}
 #start {
     margin: 25%;
     width: 50%;

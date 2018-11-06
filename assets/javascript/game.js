@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("remaining").innerHTML = "Guesses remaining: <span id='remaining-number' class='general-text'>" + remainingGuesses + "</span>";
                 if(remainingGuesses === 0)
                 {
-                    alert("Game Over!");
+                    $('#looseModal').modal('show');
                     initialize();
                 }
             }
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 wins++;
                 wordWithDashes = [];
-                document.getElementById("word").innerHTML = "";
+                $('#winModal').modal('show');
                 document.getElementById("wins").innerHTML = "Wins: <span id='win-number' class='general-text'>" + wins + "</span>";
                 initialize();
             }

@@ -43,6 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   document.onkeyup = function(event) {
+    if(event.key === "Enter")
+    {
+        $('#looseModal').modal('hide');
+        $('#winModal').modal('hide');
+    }
     if(elementsHidden)
     {
         elementsHidden = false;

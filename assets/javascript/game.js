@@ -45,8 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
   document.onkeyup = function(event) {
     if(event.key === "Enter")
     {
-        $('#looseModal').modal('hide');
-        $('#winModal').modal('hide');
+        $('#modal').modal('hide');
     }
     if(elementsHidden)
     {
@@ -88,7 +87,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("remaining").innerHTML = "Guesses remaining: <span id='remaining-number' class='general-text'>" + remainingGuesses + "</span>";
                 if(remainingGuesses === 0)
                 {
-                    $('#looseModal').modal('show');
+                    var modal = $('#modal');
+                    modal.find('.modal-body').text('You loose! Better luck next time!');
+                    modal.find('.modal-header').html('You loose');
+                    $('#modal').modal('show');
+                    
                     initialize();
                 }
             }
@@ -97,7 +100,10 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 wins++;
                 wordWithDashes = [];
-                $('#winModal').modal('show');
+                var modal = $('#modal');
+                modal.find('.modal-header').html('You win');
+                modal.find('.modal-body').text('Congrats, you correctly guessed the word: ' + word);
+                $('#modal').modal('show');
                 document.getElementById("wins").innerHTML = "Wins: <span id='win-number' class='general-text'>" + wins + "</span>";
                 initialize();
             }

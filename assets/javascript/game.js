@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
     guessed = [];
     wordWithDashes = [];
     word = words[Math.floor(Math.random() * words.length)];
-    console.log(word);
     wordArray = word.split('');
     document.getElementById("guessed").innerHTML = "Letters already guessed: <span id='guessed-letters' class='general-text'>" + guessed.join(" ") + "</span>";
     document.getElementById("remaining").innerHTML = "Guesses remaining: <span id='remaining-number' class='general-text'>" + remainingGuesses + "</span>";
@@ -30,9 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
   {
     for(x = 0; x < word.length; x++)
     {
-        if(word.charAt(x) != " ")
+        if(word.charAt(x) !== " ")
         {
-            wordWithDashes[x] = "-";
+            wordWithDashes[x] = "_";
         }
         else 
         {
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
         {
             if(guessed.indexOf(input) === -1)
             {
-                guessed[guessed.length + 1] = input;
+                guessed.push(input);
             }
             else
             {
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
 
-            if(wordWithDashes.indexOf('-') === -1)
+            if(wordWithDashes.indexOf('_') === -1)
             {
                 wins++;
                 wordWithDashes = [];
